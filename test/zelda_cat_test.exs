@@ -16,7 +16,7 @@ defmodule ZeldaCatTest do
   end
 
   test "when we send a 'hit' event to the entity, the hp diminishes" do
-    {:ok, entity} = Entity.init()
+    {:ok, entity} = Entity.init
     Entity.add_component entity, HealthComponent, 100
 
     Entity.notify entity, {:hit, 75}
@@ -24,7 +24,7 @@ defmodule ZeldaCatTest do
   end
 
   test "when we send a 'heal' event to the entity, the hp increases" do
-    {:ok, entity} = Entity.init()
+    {:ok, entity} = Entity.init
     Entity.add_component entity, HealthComponent, 50
 
     Entity.notify entity, {:heal, 100}
@@ -32,10 +32,17 @@ defmodule ZeldaCatTest do
   end
 
   test "when hp hits 0, the entity is dead" do
-    {:ok, entity} = Entity.init()
+    {:ok, entity} = Entity.init
     Entity.add_component entity, HealthComponent, 100
     Entity.notify entity, {:hit, 100}
 
     assert HealthComponent.alive?(entity) == false
+  end
+
+  test "when we create an entity and add a XYComponent, the entity is positioned" do
+    {:ok, entity} = Entity.init
+    Entity.add_component entity, XYComponent, {50, 50}
+
+    assert XYComponent.get_position(entity) == {50, 50}
   end
 end
