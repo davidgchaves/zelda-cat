@@ -30,4 +30,12 @@ defmodule ZeldaCatTest do
     Entity.notify entity, {:heal, 100}
     assert HealthComponent.get_hp(entity) == 150
   end
+
+  test "when hp hits 0, the entity is dead" do
+    {:ok, entity} = Entity.init()
+    Entity.add_component entity, HealthComponent, 100
+    Entity.notify entity, {:hit, 100}
+
+    assert HealthComponent.alive?(entity) == false
+  end
 end
