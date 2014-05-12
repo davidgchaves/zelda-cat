@@ -20,4 +20,8 @@ defmodule XYComponent do
   def handle_event({:move_to, {:y, new_y}}, {x, _}) do
     {:ok, {x, new_y}}
   end
+
+  def handle_event({:move_to, {:x, new_x}}, {_, y}) do
+    {:ok, {new_x, y}}
+  end
 end
