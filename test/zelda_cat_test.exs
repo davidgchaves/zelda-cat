@@ -7,4 +7,11 @@ defmodule ZeldaCatTest do
 
     assert HealthComponent.get_hp(entity) == 100
   end
+
+  test "when we make a new entity and add a HealthComponent, the entity is alive" do
+    {:ok, entity} = Entity.init
+    Entity.add_component entity, HealthComponent, 100
+
+    assert HealthComponent.alive?(entity) == true
+  end
 end
