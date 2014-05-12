@@ -61,4 +61,11 @@ defmodule ZeldaCatTest do
     Entity.notify entity, {:move_to, {:x, 35}}
     assert XYComponent.get_position(entity) == {35, 50}
   end
+
+  test "when we create an entity and add a WeaponComponent, the entity starts with an empty list of weapons" do
+    {:ok, entity} = Entity.init
+    Entity.add_component entity, WeaponComponent, []
+
+    assert WeaponComponent.list_available_weapons(entity) == []
+  end
 end
