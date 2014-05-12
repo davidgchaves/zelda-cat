@@ -45,4 +45,12 @@ defmodule ZeldaCatTest do
 
     assert XYComponent.get_position(entity) == {50, 50}
   end
+
+  test "when we send a 'move_to' event with a 'y' coordinate to the entity, it moves in the y-axis" do
+    {:ok, entity} = Entity.init
+    Entity.add_component entity, XYComponent, {50, 50}
+
+    Entity.notify entity, {:move_to, {:y, 35}}
+    assert XYComponent.get_position(entity) == {50, 35}
+  end
 end
