@@ -28,4 +28,8 @@ defmodule HealthComponent do
   def handle_event({:hit, amount}, hp) do
     {:ok, hp - amount}
   end
+
+  def handle_event({:heal, amount}, hp) do
+    {:ok, hp + amount}
+  end
 end

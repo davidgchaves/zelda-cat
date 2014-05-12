@@ -22,4 +22,12 @@ defmodule ZeldaCatTest do
     Entity.notify entity, {:hit, 75}
     assert HealthComponent.get_hp(entity) == 25
   end
+
+  test "when we send a 'heal' event to the entity, the hp increases" do
+    {:ok, entity} = Entity.init()
+    Entity.add_component entity, HealthComponent, 50
+
+    Entity.notify entity, {:heal, 100}
+    assert HealthComponent.get_hp(entity) == 150
+  end
 end
