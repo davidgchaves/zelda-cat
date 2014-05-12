@@ -16,4 +16,8 @@ defmodule WeaponComponent do
   def handle_call(:list_available_weapons, weapons) do
     {:ok, weapons, weapons}
   end
+
+  def handle_event({:add_weapon, weapon}, weapons) do
+    {:ok, weapons ++ [weapon]}
+  end
 end

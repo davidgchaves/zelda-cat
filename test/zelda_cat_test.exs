@@ -68,4 +68,13 @@ defmodule ZeldaCatTest do
 
     assert WeaponComponent.list_available_weapons(entity) == []
   end
+
+  test "when we send two 'add_weapon' events to the entity, the entity gets two new weapons" do
+    {:ok, entity} = Entity.init
+    Entity.add_component entity, WeaponComponent, []
+
+    Entity.notify entity, {:add_weapon, "fende testas"}
+    Entity.notify entity, {:add_weapon, "fouce"}
+    assert WeaponComponent.list_available_weapons(entity) == ["fende testas", "fouce"]
+  end
 end
