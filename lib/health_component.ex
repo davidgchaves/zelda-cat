@@ -24,4 +24,8 @@ defmodule HealthComponent do
   def handle_call(:alive?, hp) do
     {:ok, hp > 0, hp}
   end
+
+  def handle_event({:hit, amount}, hp) do
+    {:ok, hp - amount}
+  end
 end

@@ -14,4 +14,12 @@ defmodule ZeldaCatTest do
 
     assert HealthComponent.alive?(entity) == true
   end
+
+  test "when we send a 'hit' event to the entity, the hp diminishes" do
+    {:ok, entity} = Entity.init()
+    Entity.add_component entity, HealthComponent, 100
+
+    Entity.notify entity, {:hit, 75}
+    assert HealthComponent.get_hp(entity) == 25
+  end
 end
